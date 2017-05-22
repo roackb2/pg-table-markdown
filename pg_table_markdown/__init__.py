@@ -6,10 +6,10 @@ from pg_table_markdown.queries import build_schema_query
 
 
 SECTION_HEADING = '### {0} \n\n'
-TABLE_HEADER = 'Column | Type | Default | Nullable \n'
-TABLE_DIVIDER = '--- | --- | --- | --- \n'
-TABLE_ROW = '{column_name} | {data_type} | {column_default} | {is_nullable} \n'
-TABLE_ROW_WITH_MAXLENGTH = '{column_name} | {data_type}({character_maximum_length}) | {column_default} | {is_nullable} \n'
+TABLE_HEADER = 'Column | Type | Default | Nullable | Description \n'
+TABLE_DIVIDER = '--- | --- | --- | --- | --- \n'
+TABLE_ROW = '{column_name} | {data_type} | {column_default} | {is_nullable} | {description} \n'
+TABLE_ROW_WITH_MAXLENGTH = '{column_name} | {data_type}({character_maximum_length}) | {column_default} | {is_nullable} | {description} \n'
 
 @click.command()
 @click.option('--database_url', prompt=True, help='Database connection URL')
@@ -38,7 +38,7 @@ def cli(database_url, table_schema, output_file, max_length):
             f.write(TABLE_HEADER)
             f.write(TABLE_DIVIDER)
             for column in parsed[table_name]:
-                if max_length and column['character_maximum_length'] is not None: 
+                if max_length and column['character_maximum_length'] is not None:
                     f.write(TABLE_ROW_WITH_MAXLENGTH.format(**column))
                 else:
                     f.write(TABLE_ROW.format(**column))
