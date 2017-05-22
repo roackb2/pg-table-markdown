@@ -12,6 +12,6 @@ def build_schema_query(table_schema):
       right join information_schema.columns c on (pgd.objsubid=c.ordinal_position
         and  c.table_schema=st.schemaname and c.table_name=st.relname)
     WHERE       c.table_schema = '{0}'
-    ORDER BY    c.table_name, ordinal_position;
+    ORDER BY    c.table_name, c.ordinal_position;
     """.format(table_schema)
     return schema_query
