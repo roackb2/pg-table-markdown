@@ -12,7 +12,7 @@ setup(
     py_modules=['pg_table_markdown'],
     install_requires=[
         'Click==6.2',
-        'psycopg2==2.6.1',
+        'psycopg2==2.8.6',
     ],
     entry_points='''
         [console_scripts]
